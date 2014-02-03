@@ -1,3 +1,0 @@
-config CGMINER_AVALON2
-	bool "Enable Avalon2(A3255) support and disable Avalon(A3256)"
-	default n

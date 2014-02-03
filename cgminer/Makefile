@@ -10,10 +10,10 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cgminer
 
-PKG_VERSION:=3.4.3.clam.lpc
-PKG_REV:=clam_lpc
+PKG_VERSION:=3.11.0.clam
+PKG_REV:=642567f7d042c0a923d81b2e4dbae59924a76e2d
 
-PKG_RELEASE:=1
+PKG_RELEASE:=3
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.bz2
@@ -32,9 +32,9 @@ define Package/cgminer
 	TITLE:=cgminer
 	URL:=https://github.com/binarier/cgminer
 ifeq ($(CONFIG_TARGET_brcm2708_RaspberryPi),y)
-	DEPENDS:=+libcurl +libpthread +jansson +udev +libncurses
+	DEPENDS:=+libcurl +libpthread +jansson +udev +libusb-1.0 +libncurses
 else
-	DEPENDS:=+libcurl +libpthread +jansson +udev
+	DEPENDS:=+libcurl +libpthread +jansson +udev +libusb-1.0
 endif
 endef
 
@@ -51,7 +51,7 @@ define Package/cgminer/config
 	endmenu
 endef
 
-CONFIGURE_ARGS += --enable-clam --disable-opencl --disable-adl
+CONFIGURE_ARGS += --enable-clam --disable-opencl --disable-adl --with-system-libusb 
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 define Build/Compile
@@ -70,8 +70,8 @@ define Package/cgminer/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cgminer  $(1)/usr/bin
 	$(INSTALL_BIN) $(FILES_DIR)/cgminer-monitor        $(1)/usr/bin
 
-	$(INSTALL_BIN) $(FILES_DIR)/cgminer.avalon2.init   $(1)/etc/init.d/cgminer
-	$(CP)          $(FILES_DIR)/cgminer.avalon2.config $(1)/etc/config/cgminer
+	$(INSTALL_BIN) $(FILES_DIR)/cgminer.init   $(1)/etc/init.d/cgminer
+	$(CP)          $(FILES_DIR)/cgminer.config $(1)/etc/config/cgminer
 endef
 
 $(eval $(call BuildPackage,cgminer))
