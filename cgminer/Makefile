@@ -11,13 +11,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 PKG_VERSION:=3.11.0.clam
-PKG_REV:=642567f7d042c0a923d81b2e4dbae59924a76e2d
+PKG_REV:=cdc4171
 
-PKG_RELEASE:=3
+PKG_RELEASE:=6
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.bz2
-PKG_SOURCE_URL:=git://github.com/binarier/cgminer.git
+PKG_SOURCE_URL:=/home/binarier/cgminer
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
