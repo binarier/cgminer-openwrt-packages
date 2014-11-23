@@ -10,8 +10,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cgminer
 
-PKG_VERSION:=3.4.3.clam.lpc
-PKG_REV:=clam_lpc
+PKG_VERSION:=4.7.1.hfr
+PKG_REV:=hfr
 
 PKG_RELEASE:=1
 PKG_INSTALL:=1
@@ -51,13 +51,13 @@ define Package/cgminer/config
 	endmenu
 endef
 
-CONFIGURE_ARGS += --enable-clam --disable-opencl --disable-adl
+CONFIGURE_ARGS += --enable-hfr
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 define Build/Compile
 	$(call Build/Compile/Default)
 	(cd $(PKG_BUILD_DIR) && \
-	  $(TARGET_CC) -Icompat/jansson -Icompat/libusb-1.0/libusb \
+	  $(TARGET_CC) -Icompat/jansson \
 	  api-example.c -o cgminer-api;)
 endef
 
